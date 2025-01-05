@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function Home() {
   return (
     <>
@@ -5,10 +7,12 @@ export default function Home() {
         <nav className="bg-white border-gray-200 py-2.5 dark:bg-gray-900">
           <div className="flex flex-wrap items-center justify-between max-w-screen-xl px-4 mx-auto">
             <a href="#" className="flex items-center">
-              <img
+              <Image
                 src="https://demo.themesberg.com/landwind/images/logo.svg"
                 className="h-6 mr-3 sm:h-9"
                 alt="Landwind Logo"
+                width={30}
+                height={30}
               />
               <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
                 Landwind
@@ -153,9 +157,11 @@ export default function Home() {
             </p>
           </div>
           <div className="hidden lg:mt-0 lg:col-span-5 lg:flex">
-            <img
+            <Image
               src="https://demo.themesberg.com/landwind/images/hero.png"
               alt="hero image"
+              width={600}
+              height={200}
             />
           </div>
         </div>
@@ -448,18 +454,22 @@ export default function Home() {
                 of traditional ITSM solutions.
               </p>
             </div>
-            <img
+            <Image
               className="hidden w-full mb-4 rounded-lg lg:mb-0 lg:flex"
               src="https://demo.themesberg.com/landwind/images/feature-1.png"
               alt="dashboard feature image"
+              width={300}
+              height={300}
             />
           </div>
 
           <div className="items-center gap-8 lg:grid lg:grid-cols-2 xl:gap-16">
-            <img
+            <Image
               className="hidden w-full mb-4 rounded-lg lg:mb-0 lg:flex"
               src="https://demo.themesberg.com/landwind/images/feature-2.png"
               alt="feature image 2"
+              width={300}
+              height={300}
             />
             <div className="text-gray-500 sm:text-lg dark:text-gray-400">
               <h2 className="mb-4 text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white">
@@ -719,16 +729,18 @@ export default function Home() {
             </svg>
             <blockquote>
               <p className="text-xl font-medium text-gray-900 md:text-2xl dark:text-white">
-                "Landwind is just awesome. It contains tons of predesigned
+                &quot;Landwind is just awesome. It contains tons of predesigned
                 components and pages starting from login screen to complex
-                dashboard. Perfect choice for your next SaaS application."
+                dashboard. Perfect choice for your next SaaS application.&quot;
               </p>
             </blockquote>
             <figcaption className="flex items-center justify-center mt-6 space-x-3">
-              <img
+              <Image
                 className="w-6 h-6 rounded-full"
                 src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/michael-gouch.png"
                 alt="profile picture"
+                width={300}
+                height={300}
               />
               <div className="flex items-center divide-x-2 divide-gray-500 dark:divide-gray-700">
                 <div className="pr-3 font-medium text-gray-900 dark:text-white">
@@ -1469,10 +1481,12 @@ export default function Home() {
               href="#"
               className="flex items-center justify-center mb-5 text-2xl font-semibold text-gray-900 dark:text-white"
             >
-              <img
+              <Image
                 src="https://demo.themesberg.com/landwind/images/logo.svg"
                 className="h-6 mr-3 sm:h-9"
                 alt="Landwind Logo"
+                width={30}
+                height={30}
               />
               Landwind
             </a>
