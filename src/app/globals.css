@@ -1,0 +1,35 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+@import "@/styles/clerk.css";
+
+
+::selection {
+    background-color: #FFD700;
+    color: #131616;
+}
+
+::-moz-selection { /* Code for Firefox */
+    background-color: #FFD700;
+    color: #131616;
+}
+
+
+.fire-animation {
+    display: inline-block;
+    color: #FFD700; /* Ana yazı rengi */
+    position: relative;
+    animation: flicker 1.5s infinite alternate;
+  }
+  
+  @keyframes flicker {
+    0% { 
+      text-shadow: 0 0 10px rgba(255, 78, 0, 0.5), 0 0 20px rgba(255, 78, 0, 0.4), 0 0 30px rgba(255, 78, 0, 0.3), 0 0 40px rgba(255, 78, 0, 0.2);
+    }
+    50% { 
+      text-shadow: 0 0 20px rgba(255, 78, 0, 0.6), 0 0 30px rgba(255, 78, 0, 0.5), 0 0 40px rgba(255, 78, 0, 0.4), 0 0 50px rgba(255, 78, 0, 0.3);
+    }
+    100% { 
+      text-shadow: 0 0 30px rgba(255, 78, 0, 0.7), 0 0 40px rgba(255, 78, 0, 0.6), 0 0 50px rgba(255, 78, 0, 0.5), 0 0 60px rgba(255, 78, 0, 0.4);
+    }
+  }
