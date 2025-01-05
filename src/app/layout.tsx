@@ -32,13 +32,15 @@ export default function RootLayout({
   }, []);
 
   return (
-    <ClerkProvider>
+    <ClerkProvider
+      publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
+    >
       <html lang="en">
         <body className={inter.className}>
           <GeneralStoreProvider>
-          <div className="dark:bg-boxdark-2 dark:text-bodydark">
-          {loading ? <Loader /> : children}
-        </div>
+            <div className="dark:bg-boxdark-2 dark:text-bodydark">
+              {loading ? <Loader /> : children}
+            </div>
             {/* <CommonLayout>{loading ? <Loader /> : children}</CommonLayout> */}
           </GeneralStoreProvider>
         </body>
