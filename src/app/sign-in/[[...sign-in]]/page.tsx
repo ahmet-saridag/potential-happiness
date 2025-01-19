@@ -24,7 +24,11 @@ export default function SignInPage() {
         <ClerkLoading>
           <span className="loading loading-infinity loading-lg h-[35rem]"></span>
         </ClerkLoading>
-        <SignIn path="/sign-in" forceRedirectUrl="/dashboard" />
+        <SignIn
+          signUpUrl="/sign-up"
+          path="/sign-in"
+          forceRedirectUrl="/dashboard"
+        />
       </section>
     </>
   );
