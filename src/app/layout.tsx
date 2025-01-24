@@ -36,6 +36,10 @@ export default function RootLayout({
       publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
     >
       <html lang="en">
+        {/* <head>
+        <link href="https://cdn.jsdelivr.net/npm/flowbite@3.0.0/dist/flowbite.min.css" rel="stylesheet" />
+
+        </head> */}
         <body className={inter.className}>
           <GeneralStoreProvider>
             <div className="dark:bg-boxdark-2 dark:text-bodydark">
@@ -43,6 +47,7 @@ export default function RootLayout({
             </div>
             {/* <CommonLayout>{loading ? <Loader /> : children}</CommonLayout> */}
           </GeneralStoreProvider>
+          {/* <script src="https://cdn.jsdelivr.net/npm/flowbite@3.0.0/dist/flowbite.min.js"></script> */}
         </body>
       </html>
     </ClerkProvider>
