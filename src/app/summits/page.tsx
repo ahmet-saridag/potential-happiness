@@ -1,13 +1,12 @@
 "use client"
 
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
-import EventListComponent from "@/components/EventList";
-import EventListHeader from "@/components/EventListHeader";
+import SummitListComponent from "@/components/SummitList";
+import SummitListHeader from "@/components/SummitListHeader";
 import {useState, useEffect} from "react"
 
-
-// EventsPage component'i
-const EventsPage = () => {
+// SummitsPage component'i
+const SummitsPage = () => {
   const [isOnline, setIsOnline] = useState(false)
   const [isFree, setIsFree] = useState(false)
   const [searchValue, setSearchValue] = useState("")
@@ -15,8 +14,8 @@ const EventsPage = () => {
 
   // Toggle seçeneklerini tanımlayalım
   const toggleOptions = [
-    "All / Online events",
-    "All / Free events"
+    "All / Online summits",
+    "All / Free summits"
   ];
 
   // Toggle durumu değiştiğinde yapılacak işlem
@@ -31,13 +30,13 @@ const EventsPage = () => {
 
   return (
     <DefaultLayout>
-      <EventListHeader
+      <SummitListHeader
         toggleOptions={toggleOptions}
         onToggleChange={handleToggleChange}
-        searchPlaceholder="Search events..."
+        searchPlaceholder="Search summits..."
         setSearchValue={setSearchValue}
       />
-      <EventListComponent 
+      <SummitListComponent 
       isFree={isFree}
       isOnline={isOnline}
       searchValue={searchValue}
@@ -46,4 +45,4 @@ const EventsPage = () => {
   );
 };
 
-export default EventsPage;
+export default SummitsPage;

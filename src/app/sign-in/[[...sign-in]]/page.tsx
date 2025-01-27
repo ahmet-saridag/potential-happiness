@@ -3,6 +3,7 @@
 import { SignIn, ClerkLoading } from "@clerk/nextjs";
 import { useEffect } from "react";
 
+
 export default function SignInPage() {
   useEffect(() => {
     const intervalId = setInterval(() => {

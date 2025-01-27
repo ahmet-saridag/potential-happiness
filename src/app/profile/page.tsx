@@ -1,19 +1,22 @@
-import Breadcrumb from "@/components/Breadcrumbs/Breadcrumb";
 import Image from "next/image";
 import { Metadata } from "next";
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
 import Link from "next/link";
 import { UserProfile } from "@clerk/nextjs";
+import Breadcrumb from "@/components/Breadcrumbs/Breadcrumb";
 
 export const metadata: Metadata = {
-  title: "Next.js Profile | TailAdmin - Next.js Dashboard Template",
+  title: "Swarm Connection",
   description:
-    "This is Next.js Profile page for TailAdmin - Next.js Tailwind CSS Admin Dashboard Template",
+    "Swarm Connection",
 };
 
 const Profile = () => {
   return (
     <DefaultLayout>
+
+<Breadcrumb pageName="Profile" />
+
       <UserProfile routing="virtual" />
     </DefaultLayout>
   );

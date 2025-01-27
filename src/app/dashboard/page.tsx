@@ -1,11 +1,11 @@
-import ECommerce from "@/components/Dashboard/E-commerce";
+import DashboardComponent from "@/components/Dashboard/DashboardComponent";
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
 
 export default function Dashboard() {
   return (
     <>
       <DefaultLayout>
-        <ECommerce />
+        <DashboardComponent />
       </DefaultLayout>
       {/* <LoginPage></LoginPage> */}
     </>
