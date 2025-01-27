@@ -1,3 +1,5 @@
+"use client"
+
 import React, { useState, useEffect } from "react";
 import { MdEvent } from "react-icons/md"; // MdEvent ikonu import et
 

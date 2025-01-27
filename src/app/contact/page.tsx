@@ -14,7 +14,7 @@ const Contact = () => {
   const [successMessage, setSuccessMessage] = useState("");
   const { user } = useUser()
 
-  const onSubmit = async (data: { fullName: string; phoneNumber: string; emailAddress: string; message: string }) => {
+  const onSubmit = async (data: any) => {
     setLoading(true);
 
     const newMessage = {
@@ -59,7 +59,7 @@ const Contact = () => {
                       type="text"
                       id="fullName"
                       placeholder="John Doe"
-                      defaultValue={user.fullName}
+                      defaultValue={user?.fullName ?? ""}
                     />
                   </div>
 
@@ -87,7 +87,7 @@ const Contact = () => {
                     type="email"
                     id="emailAddress"
                     placeholder="johndoe@example.com"
-                    defaultValue={user.primaryEmailAddress.emailAddress}
+                    defaultValue={user?.primaryEmailAddress?.emailAddress ?? ""}
                   />
                 </div>
 
