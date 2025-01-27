@@ -66,7 +66,7 @@ const DashboardComponent: React.FC = () => {
       {/* Stat Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {/* Summit Card */}
-        <CardDataStats title="Total Summit 👥" total={isLoading ? "Loading..." : `${summits.length} summits`} rate="0.43%" levelUp>
+        <CardDataStats title="Total Summit 👥" total={isLoading ? "Loading..." : `${summits.length} summits`} rate={`${summits.length === 0 ? "0%" : "0.43%"}`} levelUp>
           {isLoading ? (
             <div className="h-6 w-6 bg-gray-300 animate-pulse rounded-full"></div>
           ) : (
@@ -92,7 +92,7 @@ const DashboardComponent: React.FC = () => {
         </CardDataStats>
 
         {/* Event Card */}
-        <CardDataStats title="Total Event 🎉" total={isLoading ? "Loading..." : `${events.length} events`} rate="4.35%" levelUp>
+        <CardDataStats title="Total Event 🎉" total={isLoading ? "Loading..." : `${events.length} events`} rate={`${events.length === 0 ? "0%" : "4.35%"}`} levelUp>
           {isLoading ? (
             <div className="h-6 w-6 bg-gray-300 animate-pulse rounded-full"></div>
           ) : (

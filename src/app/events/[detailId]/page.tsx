@@ -183,6 +183,7 @@ export default function EventDetail() {
 
   const isPastEvent = (endDate: string) => new Date(endDate) < new Date();
   const pastEvent = isPastEvent(event.endDate);
+  const isCountZero = Number(event.participantCount) === 0
 
   return (
     <DefaultLayout>
@@ -213,13 +214,12 @@ export default function EventDetail() {
               <span className="bg-yellow-100 text-blue-800 text-sm font-medium px-4 py-2 rounded-lg dark:bg-blue-900 dark:text-blue-300">
                 {event.isOnline ? "🌐 Online" : "🏢 Physical"}
               </span>
-              {event.participantCount && event.participantCount !== 0 && (
+              {!isCountZero && event.participantCount && (
                 <span className="bg-yellow-100 text-blue-800 text-sm font-medium px-4 py-2 rounded-lg dark:bg-blue-900 dark:text-blue-300">
-                  {event.participantCount && event.participantCount !== 0
-                    ? "👥 " +
+                  { "👥 " +
                       event.participantCount +
                       " awesome people are in! Let the fun begin! 🚀🥳"
-                    : ""}
+                   }
                 </span>
               )}
             </div>

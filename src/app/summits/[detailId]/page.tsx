@@ -183,6 +183,9 @@ export default function SummitDetail() {
 
   const isPastSummit = (endDate: string) => new Date(endDate) < new Date();
   const pastSummit = isPastSummit(summit.endDate);
+  const isCountZero = Number(summit?.participantCount) === 0
+
+  console.log(isCountZero)
 
   return (
     <DefaultLayout>
@@ -213,13 +216,12 @@ export default function SummitDetail() {
               <span className="bg-yellow-100 text-blue-800 text-sm font-medium px-4 py-2 rounded-lg dark:bg-blue-900 dark:text-blue-300">
                 {summit.isOnline ? "🌐 Online" : "🏢 Physical"}
               </span>
-              {summit.participantCount && summit.participantCount !== 0 && (
+              {!isCountZero && summit.participantCount && (
                 <span className="bg-yellow-100 text-blue-800 text-sm font-medium px-4 py-2 rounded-lg dark:bg-blue-900 dark:text-blue-300">
-                  {summit.participantCount && summit.participantCount !== 0
-                    ? "👥 " +
+                  { "👥 " +
                       summit.participantCount +
                       " awesome people are in! Let the fun begin! 🚀🥳"
-                    : ""}
+                   }
                 </span>
               )}
             </div>

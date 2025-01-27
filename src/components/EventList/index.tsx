@@ -171,6 +171,26 @@ const EventListComponent = ({
             })}
       </div>
 
+      {currentEvents.length === 0 && (
+  <div className="w-full flex flex-col justify-center gap-3 items-center text-gray-500 dark:text-gray-400">
+              <Link href="/dashboard">
+            <Image
+              width={176}
+              height={32}
+              src={"/images/logo/amblem.svg"}
+              alt="Logo"
+              priority
+            />
+          </Link>
+    <p className="mt-2 text-center">No events found matching your criteria.</p>
+    <Link href="/create-event">
+          <button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+            Create Event
+          </button>
+        </Link>
+  </div>
+)}
+
       {totalPages > 1 && (
         <div className="flex justify-center mt-6">
           <button
