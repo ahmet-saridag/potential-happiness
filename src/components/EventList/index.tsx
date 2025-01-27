@@ -5,14 +5,17 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 
-
 interface EventListComponentProps {
   isFree: boolean;
   isOnline: boolean;
   searchValue: string;
 }
 
-const EventListComponent = ({ isFree, isOnline, searchValue }: EventListComponentProps) => {
+const EventListComponent = ({
+  isFree,
+  isOnline,
+  searchValue,
+}: EventListComponentProps) => {
   const [events, setEvents] = useState<any[]>([]);
   const [filteredEvents, setFilteredEvents] = useState<any[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -31,10 +34,12 @@ const EventListComponent = ({ isFree, isOnline, searchValue }: EventListComponen
       try {
         const response = await axios.get("/api/getEvents");
         if (response.data) {
-          const formattedEvents: any = Object.entries(response.data).map(([id, event]: any) => ({
-            id,
-            ...event,
-          }));
+          const formattedEvents: any = Object.entries(response.data).map(
+            ([id, event]: any) => ({
+              id,
+              ...event,
+            })
+          );
           setEvents(formattedEvents);
         }
       } catch (error) {
@@ -49,31 +54,36 @@ const EventListComponent = ({ isFree, isOnline, searchValue }: EventListComponen
 
   useEffect(() => {
     let filtered = [...events];
-  
+
     // Filtreleme işlemleri
     if (isFree) {
       filtered = filtered.filter((event) => event.eventType === "free");
     }
-  
+
     if (isOnline) {
       filtered = filtered.filter((event) => event.isOnline);
     }
-  
+
     if (searchValue && searchValue.length > 2) {
       filtered = filtered.filter((event) => {
-        const title = event.title?.toLowerCase() || ''; // Eğer title yoksa boş bir string kullan
-        const description = event.shortDescription?.toLowerCase() || ''; // Eğer description yoksa boş bir string kullan
-        return title.includes(searchValue.toLowerCase()) || description.includes(searchValue.toLowerCase());
+        const title = event.title?.toLowerCase() || ""; // Eğer title yoksa boş bir string kullan
+        const description = event.shortDescription?.toLowerCase() || ""; // Eğer description yoksa boş bir string kullan
+        return (
+          title.includes(searchValue.toLowerCase()) ||
+          description.includes(searchValue.toLowerCase())
+        );
       });
     }
-  
+
     setFilteredEvents(filtered);
   }, [isFree, isOnline, searchValue, events]);
-  
 
   const indexOfLastEvent = currentPage * eventsPerPage;
   const indexOfFirstEvent = indexOfLastEvent - eventsPerPage;
-  const currentEvents = filteredEvents.slice(indexOfFirstEvent, indexOfLastEvent);
+  const currentEvents = filteredEvents.slice(
+    indexOfFirstEvent,
+    indexOfLastEvent
+  );
   const totalPages = Math.ceil(filteredEvents.length / eventsPerPage);
 
   return (
@@ -81,7 +91,10 @@ const EventListComponent = ({ isFree, isOnline, searchValue }: EventListComponen
       <div className="grid md:grid-cols-3 gap-6">
         {isLoading
           ? [...Array(eventsPerPage)].map((_, index) => (
-              <div key={index} className="animate-pulse flex flex-col border border-gray-200 rounded-lg shadow-sm bg-gray-100 dark:bg-gray-800">
+              <div
+                key={index}
+                className="animate-pulse flex flex-col border border-gray-200 rounded-lg shadow-sm bg-gray-100 dark:bg-gray-800"
+              >
                 <div className="w-full h-[250px] bg-gray-300 dark:bg-gray-700 rounded-t-lg"></div>
                 <div className="p-5">
                   <div className="h-5 bg-gray-300 dark:bg-gray-600 rounded w-3/4 mb-3"></div>
@@ -112,7 +125,9 @@ const EventListComponent = ({ isFree, isOnline, searchValue }: EventListComponen
                     objectFit="cover"
                   />
                   <div className="flex flex-col flex-grow p-5">
-                    <h5 className="mb-3 text-xl font-bold text-gray-900 dark:text-white">{event.title}</h5>
+                    <h5 className="mb-3 text-xl font-bold text-gray-900 dark:text-white">
+                      {event.title}
+                    </h5>
                     <div className="flex gap-2 mb-3">
                       <span className="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-sm dark:bg-blue-900 dark:text-blue-300">
                         {formatDate(event.startDate)}
@@ -124,8 +139,19 @@ const EventListComponent = ({ isFree, isOnline, searchValue }: EventListComponen
                         {event.isOnline ? "Online" : ""}
                         {event.isPhysical ? "Physical" : ""}
                       </span>
+                      {event.participantCount &&
+                        event.participantCount !== 0 && (
+                          <span className="bg-yellow-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-md dark:bg-blue-900 dark:text-blue-300">
+                            {event.participantCount &&
+                            event.participantCount !== 0
+                              ? "👥 " + event.participantCount + " people"
+                              : ""}
+                          </span>
+                        )}
                     </div>
-                    <p className="flex-grow text-gray-700 dark:text-gray-400">{event.shortDescription}</p>
+                    <p className="flex-grow text-gray-700 dark:text-gray-400">
+                      {event.shortDescription}
+                    </p>
                     {!pastEvent ? (
                       <Link
                         href={`/events/${event.id}`}
@@ -170,7 +196,9 @@ const EventListComponent = ({ isFree, isOnline, searchValue }: EventListComponen
             </button>
           ))}
           <button
-            onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+            onClick={() =>
+              setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+            }
             disabled={currentPage === totalPages}
             className="px-4 py-2 mx-1 text-sm font-medium text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600"
           >

@@ -62,7 +62,9 @@ const CreateEvent = () => {
       isPhysical: isPhysical,
       cardHover: "",
       cardImage: "",
-      createdAt: new Date()
+      createdAt: new Date(),
+      participantCount: 0,
+      participantMemberIds: []
     };
     if (data && newEvent) {
       try {

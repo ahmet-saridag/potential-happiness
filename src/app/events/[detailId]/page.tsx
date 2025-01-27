@@ -16,6 +16,7 @@ import {
   FaMicrochip,
   FaChalkboardTeacher,
 } from "react-icons/fa"; // Iconlar için react-icons
+import { useUser } from "@clerk/nextjs";
 
 interface Event {
   id: string;
@@ -39,19 +40,25 @@ interface Event {
   networkingCheckbox: boolean;
   technologyCheckbox: boolean;
   workshopCheckbox: boolean;
-  isPhysical: boolean
-  isOnline: boolean
+  isPhysical: boolean;
+  isOnline: boolean;
   startTime: string;
   endTime: string;
-  country: string
-city: string
-locationName: string
-locationAddress: string
+  country: string;
+  city: string;
+  locationName: string;
+  locationAddress: string;
+  participantCount: number;
+  participantMemberIds: string[];
 }
 
 export default function EventDetail() {
   const [event, setEvent] = useState<Event | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isRegisteringLoading, setIsRegisteringLoading] = useState(false);
+  const [isCreated, setIsCreated] = useState(false);
+  const { user } = useUser();
+
   const pathname = usePathname();
   const detailId = pathname?.split("/")[2];
 
@@ -94,9 +101,20 @@ export default function EventDetail() {
         delete correctedEvent["technology-checkbox"];
         delete correctedEvent["workshop-checkbox"];
 
-
         // Yeni veriyi state'e set et
         setEvent(correctedEvent);
+
+        if (
+          correctedEvent.participantMemberIds &&
+          correctedEvent.participantMemberIds.length > 0 &&
+          user && user.id 
+        ) {
+          if (
+            correctedEvent.participantMemberIds.some((id: string) => id === user?.id)
+          ) {
+            setIsCreated(true);
+          }
+        }
       } catch (error) {
         console.error("Error fetching event detail:", error);
       } finally {
@@ -128,6 +146,35 @@ export default function EventDetail() {
       </DefaultLayout>
     );
   }
+
+  const handleRegister = async () => {
+    if(!user) return
+    setIsRegisteringLoading(true);
+
+    const newEvent = {
+      ...event,
+      participantMemberIds: event.participantMemberIds
+        ? [...event.participantMemberIds, user.id]
+        : [user.id],
+      participantCount:
+        (event.participantCount ? event.participantCount : 0) + 1,
+    };
+
+    setEvent(newEvent);
+
+    try {
+      const response = await axios.put(`/api/updateEvent?id=${detailId}`, {
+        data: newEvent,
+      });
+      if (response) {
+        setIsRegisteringLoading(false);
+        setIsCreated(true);
+      }
+    } catch (error) {
+      console.error("Error adding event:", error);
+      setIsLoading(false);
+    }
+  };
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
@@ -166,6 +213,15 @@ export default function EventDetail() {
               <span className="bg-yellow-100 text-blue-800 text-sm font-medium px-4 py-2 rounded-lg dark:bg-blue-900 dark:text-blue-300">
                 {event.isOnline ? "🌐 Online" : "🏢 Physical"}
               </span>
+              {event.participantCount && event.participantCount !== 0 && (
+                <span className="bg-yellow-100 text-blue-800 text-sm font-medium px-4 py-2 rounded-lg dark:bg-blue-900 dark:text-blue-300">
+                  {event.participantCount && event.participantCount !== 0
+                    ? "👥 " +
+                      event.participantCount +
+                      " awesome people are in! Let the fun begin! 🚀🥳"
+                    : ""}
+                </span>
+              )}
             </div>
 
             <p className="mt-4 text-lg text-gray-700 dark:text-gray-400">
@@ -284,8 +340,20 @@ export default function EventDetail() {
                   Past Event 🕒
                 </button>
               ) : (
-                <button className="px-6 py-3 text-lg font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800">
-                  Register 📝
+                <button
+                  disabled={isCreated || isRegisteringLoading}
+                  onClick={handleRegister}
+                  className={
+                    isCreated
+                      ? "px-6 py-3 text-lg font-medium text-white bg-purple-400 rounded-lg hover:bg-purple-800"
+                      : "px-6 py-3 text-lg font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800"
+                  }
+                >
+                  {isRegisteringLoading
+                    ? "Loading..."
+                    : isCreated
+                      ? "You're going 🎉"
+                      : "Register 📝"}
                 </button>
               )}
             </div>
