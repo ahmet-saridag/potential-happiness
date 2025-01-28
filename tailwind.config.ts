@@ -22,6 +22,7 @@ const config: Config = {
     },
     extend: {
       colors: {
+        swarmColor: "#fa0",
         current: "currentColor",
         transparent: "transparent",
         white: "#FFFFFF",
